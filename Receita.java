@@ -77,29 +77,34 @@ public class Receita {
       this.chef = chef;
   }
 
+  public void setMercados(Mercados mercado) {
+    this.mercado.add(mercado);
+  }
+
   public ArrayList<Mercados> getMercados() {
       return this.mercado;
   }
 
-  public void setMercados(ArrayList<Mercados> mercado) {
-      this.mercado = mercado;
+  public void setPadaria(Padaria padaria) {
+    this.padaria.add (padaria);
   }
 
   public ArrayList<Padaria> getPadaria() {
       return this.padaria;
   }
 
-  public void setPadaria(ArrayList<Padaria> padaria) {
-      this.padaria = padaria;
-  }
+  public void setCliente(Cliente cliente) {
+    this.cliente.add(cliente);
+  } 
 
   public ArrayList<Cliente> getCliente() {
       return this.cliente;
   }
 
-  public void setCliente(ArrayList<Cliente> cliente) {
-      this.cliente = cliente;
-  }
+  public String dadosReceita(){
+    return "Receita: " + this.getNome()
+    + ", Valor: " + this.getValor();
+}
 
   @Override
   public boolean equals(Object o) 
@@ -111,8 +116,9 @@ public class Receita {
       }
       Receita receita = (Receita) o;
       return this.getChef().getCpf() == receita.getChef().getCpf()
-          && this.getValor() == receita.getValor();
-  }
+          && this.getChef().getNome() == receita.getChef().getNome()
+          && this.getNome() == receita.getNome();
+        }
 
   @Override
   public String toString() 

@@ -46,10 +46,10 @@ public class Mercados extends Estabelecimento {
         if (!(o instanceof Mercados)) {
             return false;
         }
-        Mercados padaria = (Mercados) o;
-        return Objects.equals(this.getId(), padaria.getId()) 
-            && Objects.equals(this.getNome(), padaria.getNome())
-            && Objects.equals(this.getDataAbertura(), padaria.getDataAbertura());
+        Mercados mercado = (Mercados) o;
+        return this.getId() == mercado.getId()
+            && this.getNome() == mercado.getNome()
+            && this.getDataAbertura() == mercado.getDataAbertura();
     }
 
     @Override
@@ -64,10 +64,4 @@ public class Mercados extends Estabelecimento {
                " \nPromoções:" + getPromocoes() +
                " \n";
     }
-
-    public void executaReceita(Receita receita) 
-    {
-        this.receitas.add(receita);
-        receita.liberaReceita(this);
-    };
 }

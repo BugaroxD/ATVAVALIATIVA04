@@ -34,8 +34,8 @@ public class Padaria extends Estabelecimento{
         return this.receitas;
     }
 
-    public void setReceitas(ArrayList<Receita> receitas) {
-        this.receitas = receitas;
+    public void setReceitas(Receita receitas) {
+        this.receitas.add(receitas);
     }
 
     @Override
@@ -46,9 +46,9 @@ public class Padaria extends Estabelecimento{
             return false;
         }
         Padaria padaria = (Padaria) o;
-        return Objects.equals(this.getId(), padaria.getId()) 
-            && Objects.equals(this.getNome(), padaria.getNome())
-            && Objects.equals(this.getDataAbertura(), padaria.getDataAbertura());
+        return this.getId() == padaria.getId()
+            && this.getNome() == padaria.getNome()
+            && this.getDataAbertura() == padaria.getDataAbertura();
     }
 
     @Override
@@ -63,10 +63,4 @@ public class Padaria extends Estabelecimento{
                 " \nReceitas:" + getReceitas() +
                 " \n";
     }
-
-    public void executaReceita(Receita receita) 
-    {
-        this.receitas.add(receita);
-        receita.liberaReceita(this);
-    };
 }

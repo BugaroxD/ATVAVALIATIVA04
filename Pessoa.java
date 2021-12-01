@@ -20,6 +20,9 @@ public abstract class Pessoa {
     }
 
     public Pessoa(String nome, String cpf, Date dataNasc) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNasc = dataNasc;
     }
 
     protected int getId() {
