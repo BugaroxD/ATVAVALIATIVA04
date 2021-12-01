@@ -1,11 +1,9 @@
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Chef extends Pessoa implements AnoSalario { 
@@ -52,10 +50,23 @@ public class Chef extends Pessoa implements AnoSalario {
         this.receitas.add(receita);
     }
 
-    public ArrayList<Receita> getReceitas() {
+    public ArrayList<Receita> getReceitas(){
         return this.receitas;
     }
 
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this)
+            return true;
+        if (!(o instanceof Chef)){
+            return false;
+        }
+        Chef chef = (Chef) o;
+        return this.getCpf() == chef.getCpf()
+            && this.getReceitas() == chef.getReceitas()
+            && this.getNome() == chef.getNome();
+    }
 
     @Override
     public String toString() 
@@ -80,6 +91,7 @@ public class Chef extends Pessoa implements AnoSalario {
     public String formatoAnoSalario() {
         return Double.toString(getSalario() * 12);
     }
+
  /* INTRODUÇÃO DO BANCO DE DADOS*/
 
  public static void printChef(
@@ -95,7 +107,7 @@ public class Chef extends Pessoa implements AnoSalario {
 }
 
 // Case 1 SELECT COM STATEMENT
-public static ArrayList<Chef> getChefS() throws Exception {
+public static ArrayList<Chef> getChefS(Scanner scanner) throws Exception {
   try {
       Connection con = DriverManager.getConnection(url, user, password);
       Statement stm = con.createStatement();
@@ -121,9 +133,7 @@ public static ArrayList<Chef> getChefS() throws Exception {
 }
 
 // Case 2 INSERT COM STATEMENT
-
-public static Chef getChefInsert() {
-  Scanner scanner = new Scanner(System.in);
+public static Chef getChefInsert(Scanner scanner) {
   System.out.println("Informe o nome do chef");
   String nome = scanner.next();
   System.out.println("Informe o CPF do chef");
@@ -134,7 +144,6 @@ public static Chef getChefInsert() {
   String especialidade = scanner.next();
   System.out.println("Informe o Salário do chef");
   Double salario = scanner.nextDouble();
-  scanner.close();
 
   return new Chef(
       nome,
@@ -149,12 +158,9 @@ public static void insertChefS(Chef chef) {
   try{
       Connection con = DriverManager.getConnection(url, user, password);
       Statement stm = con.createStatement();
-      boolean sql = stm.execute("INSERT INTO chef "
-          + "(nome, cpf, datanascimento, telefone) VALUES "
-          + "('"+chef.getNome()+"', '"+chef.getCpf()+"', '"+chef.getDataNasc()+"', '"+chef.getEspecialidade()+"', '"+chef.getSalario()+"')");
-      if(!sql) {
-          System.out.println("Falha na execução");
-      }
+      stm.execute("INSERT INTO chef "
+          + "(nome, cpf, datanascimento, especialidade, salario) VALUES "
+          + "('"+chef.getNome()+"', '"+chef.getCpf()+"', '"+chef.getDataNasc()+"', '"+chef.getEspecialidade()+"', "+chef.getSalario()+")");
       con.close();
   } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -162,11 +168,9 @@ public static void insertChefS(Chef chef) {
 }
 
 // Case 3 UPDATE COM STATEMENT
-
-public static Chef getChefUpdate() throws Exception {
+public static Chef getChefUpdate(Scanner scanner) throws Exception {
   try {
-      Scanner scanner = new Scanner(System.in);
-     Chef chef = Chef.getChef();
+      Chef chef = Chef.getChef(scanner);
       System.out.println("Informe o nome do funcionário (Deixar vazio para manter)");
       String nome = scanner.next();
       if (nome.length() > 0){
@@ -187,7 +191,6 @@ public static Chef getChefUpdate() throws Exception {
       if (especialidade.length() > 0){
           chef.setEspecialidade(especialidade);
       }
-      scanner.close();
       return chef;
   } catch (Exception e) {
       throw new Exception(e.getMessage());
@@ -215,10 +218,8 @@ public static void updateChefS (Chef chef) {
 }
 
 // Case 4 DELETE COM STATEMENT
-
-public static Chef getChef() throws Exception { 
+public static Chef getChef(Scanner scanner) throws Exception { 
   try {
-      Scanner scanner = new Scanner(System.in);
       System.out.println("Informe o ID de exclusão: ");
       int id = scanner.nextInt();
       Connection con = DriverManager.getConnection(url, user, password);
@@ -228,13 +229,11 @@ public static Chef getChef() throws Exception {
       if(!rs.next()) {
           throw new Exception("Id inválido");
       }
-      scanner.close();
       return new Chef(
           rs.getInt("id"),
           rs.getString("nome"),
           rs.getString("cpf"),
           rs.getDate("datanascimento"),
-          rs.getString("matricula"),
           rs.getString("especialidade"),
           rs.getDouble("salario")
       );
@@ -258,7 +257,30 @@ public static void deleteChefS(Chef chef) {
       System.out.println(e.getMessage());
   }
 }
+public static Chef getChef(Integer id) throws Exception { 
+  try {
+      Connection con = DriverManager.getConnection(url, user, password);
+      Statement stm = con.createStatement();
+      ResultSet rs = stm.executeQuery("SELECT * FROM chef WHERE id = " + id);
+      
+      if(!rs.next()) {
+          throw new Exception("Id inválido");
+      }
+      return new Chef(
+          rs.getInt("id"),
+          rs.getString("nome"),
+          rs.getString("cpf"),
+          rs.getDate("datanascimento"),
+          rs.getString("especialidade"),
+          rs.getDouble("salario")
+      );
 
+  } catch (Exception e) {
+      throw new Exception(e.getMessage());
+  }
 }
+}
+
+
     
 

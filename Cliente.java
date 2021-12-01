@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Cliente extends Pessoa{
 
-    private static String telefone;
+    private String telefone;
     ArrayList<Receita> receitas = new ArrayList<>();
 
     private final static String url = "jdbc:mysql://localhost:3306/atividadeavaliativa04?useTimezone=true&serverTimezone=UTC";
@@ -19,28 +19,28 @@ public class Cliente extends Pessoa{
     public Cliente(int id, String nome, String cpf, Date dataNasc, String telefone   
     ) {
         super(id, nome, cpf, dataNasc);
-        Cliente.telefone = telefone;
+        this.telefone = telefone;
     }
 
     public Cliente(String nome, String cpf, Date dataNasc, String telefone) {
       super(nome, cpf, dataNasc);
-      Cliente.telefone = telefone;
+      this.telefone = telefone;
     }
 
     public String getTelefone() {
-        return Cliente.telefone;
+        return this.telefone;
     }
 
     public void setTelefone(String telefone) {
-        Cliente.telefone = telefone;
+        this.telefone = telefone;
     }
 
     public ArrayList<Receita> getReceitas() {
         return this.receitas;
     }
 
-    public void setReceitas(ArrayList<Receita> receitas) {
-        this.receitas = receitas;
+    public void setReceitas(Receita receitas) {
+        this.receitas.add(receitas);
     }
 
     @Override
@@ -66,15 +66,9 @@ public class Cliente extends Pessoa{
                 " \n";
     }
 
-    /*
-    public void executaReceita(Receita receita) 
-    {this.receitas.adicionarElemento(receita);
-     receita.liberaReceita(this);}
-    */
-
     @Override
-    public String carteira() {
-        return null;
+    public String carteira(){
+        return "\nTelefone: " + this.getTelefone();
     };
 
     /* INTRODUÇÃO DO BANCO DE DADOS*/
@@ -92,16 +86,16 @@ public class Cliente extends Pessoa{
     }
 
     // Case 1 SELECT COM STATEMENT
-    public static ArrayList<Cliente> getClienteS() throws Exception {
+    public static ArrayList<Cliente> getClienteS(Scanner scanner) throws Exception {
         try {
             Connection con = DriverManager.getConnection(url, user, password);
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM cliente;");
-            ArrayList<Cliente> clientes = new ArrayList<>();
+            ArrayList<Cliente> cliente = new ArrayList<>();
             while (rs.next()) {
-                clientes.add(
+                cliente.add(
                     new Cliente(
-                        rs.getInt("id"),
+                        rs.getInt("idCliente"),
                         rs.getString("nome"),
                         rs.getString("cpf"),
                         rs.getDate("datanascimento"),
@@ -110,16 +104,14 @@ public class Cliente extends Pessoa{
                 );
             }
             con.close();
-            return clientes;
+            return cliente;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }             
     }
 
     // Case 2 INSERT COM STATEMENT
-
-    public static Cliente getClienteInsert() {
-        Scanner scanner = new Scanner(System.in);
+    public static Cliente getClienteInsert(Scanner scanner) {
         System.out.println("Informe o nome do cliente");
         String nome = scanner.next();
         System.out.println("Informe o CPF do cliente");
@@ -128,7 +120,6 @@ public class Cliente extends Pessoa{
         String dataNasc = scanner.next();
         System.out.println("Informe o Telefone do cliente");
         String telefone = scanner.next();
-        scanner.close();
 
         return new Cliente(
             nome,
@@ -142,12 +133,9 @@ public class Cliente extends Pessoa{
         try{
             Connection con = DriverManager.getConnection(url, user, password);
             Statement stm = con.createStatement();
-            boolean sql = stm.execute("INSERT INTO cliente "
+            stm.execute("INSERT INTO cliente "
                 + "(nome, cpf, datanascimento, telefone) VALUES "
                 + "('"+cliente.getNome()+"', '"+cliente.getCpf()+"', '"+cliente.getDataNasc()+"', '"+cliente.getTelefone()+"')");
-            if(!sql) {
-                System.out.println("Falha na execução");
-            }
             con.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -155,11 +143,9 @@ public class Cliente extends Pessoa{
     }
 
     // Case 3 UPDATE COM STATEMENT
-
-    public static Cliente getClienteUpdate() throws Exception {
+    public static Cliente getClienteUpdate(Scanner scanner) throws Exception {
         try {
-            Scanner scanner = new Scanner(System.in);
-           Cliente cliente = Cliente.getCliente();
+            Cliente cliente = Cliente.getCliente(scanner);
             System.out.println("Informe o nome do cliente (Deixar vazio para manter)");
             String nome = scanner.next();
             if (nome.length() > 0){
@@ -180,7 +166,6 @@ public class Cliente extends Pessoa{
             if (telefone.length() > 0){
                 cliente.setTelefone(telefone);
             }
-            scanner.close();
             return cliente;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -191,15 +176,12 @@ public class Cliente extends Pessoa{
         try {
             Connection con = DriverManager.getConnection(url, user, password);
             Statement stm = con.createStatement();
-            boolean sql = stm.execute("UPDATE cliente SET "
+            stm.execute("UPDATE cliente SET "
                 + " nome = '" + cliente.getNome() + "'"
                 + ", cpf = '" + cliente.getCpf() + "'"
                 + ", datanascimento = '" + cliente.getDataNasc() + "'"
                 + ", matricula = '" + cliente.getTelefone() + "'"
                 + " WHERE id = " + cliente.getId());
-            if(!sql) {
-                System.out.println("Falha na execução");
-            }
             con.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -207,26 +189,23 @@ public class Cliente extends Pessoa{
     }
 
     // Case 4 DELETE COM STATEMENT
-
-    public static Cliente getCliente() throws Exception { 
+    public static Cliente getCliente(Scanner scanner) throws Exception { 
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Informe o ID de exclusão: ");
+            System.out.println("Informe o ID EX/UP: ");
             int id = scanner.nextInt();
             Connection con = DriverManager.getConnection(url, user, password);
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM cliente WHERE id = " + id);
+            ResultSet rs = stm.executeQuery("SELECT * FROM cliente WHERE idCliente = " + id);
             
             if(!rs.next()) {
                 throw new Exception("Id inválido");
             }
-            scanner.close();
             return new Cliente(
-                rs.getInt("id"),
+                rs.getInt("idCliente"),
                 rs.getString("nome"),
                 rs.getString("cpf"),
-                rs.getDate("data_nascimento"),
-                rs.getString("matricula")
+                rs.getDate("datanascimento"),
+                rs.getString("telefone")
             );
 
         } catch (Exception e) {
@@ -238,15 +217,32 @@ public class Cliente extends Pessoa{
         try {
             Connection con = DriverManager.getConnection(url, user, password);
             Statement stm = con.createStatement();
-            boolean sql = stm.execute("DELETE FROM cliente "
-                + " WHERE id = " + cliente.getId());
-            if(!sql) {
-                System.out.println("Falha na execução");
-            }
+            stm.execute("DELETE FROM cliente "
+                + " WHERE idCliente = " + cliente.getId());
             con.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+    public static Cliente getCliente(Integer id) throws Exception { 
+      try {
+          Connection con = DriverManager.getConnection(url, user, password);
+          Statement stm = con.createStatement();
+          ResultSet rs = stm.executeQuery("SELECT * FROM cliente WHERE idCliente = " + id);
+          
+          if(!rs.next()) {
+              throw new Exception("Id inválido");
+          }
+          return new Cliente(
+              rs.getInt("idCliente"),
+              rs.getString("nome"),
+              rs.getString("cpf"),
+              rs.getDate("datanascimento"),
+              rs.getString("telefone")
+          );
 
+      } catch (Exception e) {
+          throw new Exception(e.getMessage());
+      }
+  }
 }
