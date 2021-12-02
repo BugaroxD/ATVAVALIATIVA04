@@ -116,7 +116,7 @@ public static ArrayList<Chef> getChefS(Scanner scanner) throws Exception {
       while (rs.next()) {
           chefs.add(
               new Chef(
-                  rs.getInt("id"),
+                  rs.getInt("idChef"),
                   rs.getString("nome"),
                   rs.getString("cpf"),
                   rs.getDate("datanascimento"),
@@ -201,16 +201,13 @@ public static void updateChefS (Chef chef) {
   try {
       Connection con = DriverManager.getConnection(url, user, password);
       Statement stm = con.createStatement();
-      boolean sql = stm.execute("UPDATE chef SET "
+      stm.execute("UPDATE chef SET "
           + " nome = '" + chef.getNome() + "'"
           + ", cpf = '" + chef.getCpf() + "'"
           + ", datanascimento = '" + chef.getDataNasc() + "'"
           + ", especialidade = '" + chef.getEspecialidade() + "'"
           + ", salario = '" + chef.getSalario() + "'"
-          + " WHERE id = " + chef.getId());
-      if(!sql) {
-          System.out.println("Falha na execução");
-      }
+          + " WHERE idChef = " + chef.getId());
       con.close();
   } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -220,17 +217,17 @@ public static void updateChefS (Chef chef) {
 // Case 4 DELETE COM STATEMENT
 public static Chef getChef(Scanner scanner) throws Exception { 
   try {
-      System.out.println("Informe o ID de exclusão: ");
+      System.out.println("Informe o ID EX/UP: ");
       int id = scanner.nextInt();
       Connection con = DriverManager.getConnection(url, user, password);
       Statement stm = con.createStatement();
-      ResultSet rs = stm.executeQuery("SELECT * FROM chef WHERE id = " + id);
+      ResultSet rs = stm.executeQuery("SELECT * FROM chef WHERE idChef = " + id);
       
       if(!rs.next()) {
           throw new Exception("Id inválido");
       }
       return new Chef(
-          rs.getInt("id"),
+          rs.getInt("idChef"),
           rs.getString("nome"),
           rs.getString("cpf"),
           rs.getDate("datanascimento"),
@@ -247,11 +244,9 @@ public static void deleteChefS(Chef chef) {
   try {
       Connection con = DriverManager.getConnection(url, user, password);
       Statement stm = con.createStatement();
-      boolean sql = stm.execute("DELETE FROM chef "
-          + " WHERE id = " + chef.getId());
-      if(!sql) {
-          System.out.println("Falha na execução");
-      }
+      stm.execute("DELETE FROM chef "
+          + " WHERE idChef = " + chef.getId());
+
       con.close();
   } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -261,7 +256,7 @@ public static Chef getChef(Integer id) throws Exception {
   try {
       Connection con = DriverManager.getConnection(url, user, password);
       Statement stm = con.createStatement();
-      ResultSet rs = stm.executeQuery("SELECT * FROM chef WHERE id = " + id);
+      ResultSet rs = stm.executeQuery("SELECT * FROM chef WHERE idChef = " + id);
       
       if(!rs.next()) {
           throw new Exception("Id inválido");

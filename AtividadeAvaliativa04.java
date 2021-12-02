@@ -105,7 +105,7 @@ public class AtividadeAvaliativa04 {
             case 8:
                 try {
                     Chef.deleteChefS(
-                        Chef.getChefInsert(scanner)
+                        Chef.getChef(scanner)
                     );
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
