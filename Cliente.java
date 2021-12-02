@@ -39,9 +39,15 @@ public class Cliente extends Pessoa{
         return this.receitas;
     }
 
-    public void setReceitas(Receita receitas) {
-        this.receitas.add(receitas);
+    public void setReceitas(ArrayList<Receita> receitas) {
+        this.receitas = receitas;
     }
+
+    public void executaReceita(Receita receita) 
+    {
+        this.receitas.add(receita);
+        receita.liberaReceita(this);
+    };
 
     @Override
     public boolean equals(Object o) {

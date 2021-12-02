@@ -9,39 +9,7 @@ import java.util.Scanner;
 + Atividade Avaliativa 04
 
 */
-/*Chef chefOne = new Chef("Vitor Yuri Rezende", "692.544.186-09", "24/07/1990", "Churrasqueiro", 10874.54);
-          Chef chefTwo = new Chef("Jorge Igor Nicolas Lopes", "713.479.523-30", "04/06/1984", "Cozinheiro", 9231.12);
-          Chef chefTree = new Chef("Marlene Teresinha Gomes", "578.685.928-26", "16/04/1944", "Confeiteira", 3521.00);
-          
-          Cliente clientOne = new Cliente("Stella Fernanda Débora Rocha", "169.634.454-94", "23/06/1979", "(43) 98448-8136");
-          Cliente clientTwo = new Cliente("Renan Pedro Henrique Lopes", "210.762.348-10", "11/08/1961", "(85) 98117-7170");
-          Cliente clientTree = new Cliente("Miguel Victor Carvalho", "549.165.172-96", "05/04/1968", "(47) 99667-2829");
-          
-          Receita receitaOne = new Receita(1, "Pão de alho", "1", 27.87, chefOne);
-          Receita receitaTwo = new Receita(2, "Maminha na mostarda", "2", 87.65, chefOne);
-          Receita receitaTree = new Receita(3, "Cupim na brasa", "5", 54.87, chefOne);
-          Receita receitaFor = new Receita(4, "Picanha no alho", "1", 210.63, chefOne);
-          Receita receitaFive = new Receita(5, "Macarrão ao molho branco", "8", 54.14, chefTwo);
-          Receita receitaSix = new Receita(6, "Arroz com Feijão", "4", 14.98, chefTwo);
-          Receita receitaSeven = new Receita(7, "Ovinho frito", "3", 99.54, chefTwo);
-          Receita receitaEight = new Receita(8, "Bolo de morango", "14", 120.54, chefTree);
-          Receita receitaNine = new Receita(9, "Torta de Jujuba", "5", 135.14, chefTree);
-          Receita receitaTen = new Receita(10, "Trota de limão", "10", 27.87, chefTree);
 
-          
-          Mercado mercadoOne = new Mercado(1, "Promoção de frutas e verduras", "Mercado do zé", "28/10/2020", 1, 993, "96226558", "Rua Bejamin Franklyn", "Cruzeiro", "Nova York");
-          mercadoOne.setReceita(receitaOne);
-          mercadoOne.setReceita(receitaFor);
-          mercadoOne.setReceita(receitaTen);
-          mercadoOne.setReceita(receitaFive);
-          mercadoOne.setReceita(receitaNine);
-          
-          Padaria padariaOne = new Padaria(1, "Das 06:00 às 21:00","Padaria doce mel", "14/10/2021", 1, 993, "96226558", "Rua Bejamin Franklyn", "Cruzeiro", "Nova York");
-          padariaOne.setReceita(receitaTwo);
-          padariaOne.setReceita(receitaTree);
-          padariaOne.setReceita(receitaSix);
-          padariaOne.setReceita(receitaEight);
-          padariaOne.setReceita(receitaSeven); */
 public class AtividadeAvaliativa04 {
 
   public static void main(String[] args) throws Exception {
@@ -172,74 +140,72 @@ public class AtividadeAvaliativa04 {
 
             // Criando Padarias
                 Padaria padariaUm = new Padaria(10, "Doce Pão", "05/12/2019","08:00Hr - 19:00Hr", 13, "89000-00", "Sonho", "Nº: 1985", "Das Iguanas", "Chuville");
-                Padaria padariaDois = new Padaria(11, "SóDelicias", "01/05/2020","08:00Hr - 19:00Hr", 14, "89111-11", "Soneca", "Nº: 1784", "Das Notches", "Chuville");
-                Padaria padariaTres = new Padaria(12, "ArtVida", "02/1202018","08:00Hr - 19:00Hr", 15, "89222-22", "Ciranda", "Nº: 1644", "Das Artes", "Chuville");
-
-            // Criando Mercados
-                Mercados mercadoUm = new Mercados(13, "Milanda", "12/02/2001", "Seg, Qua, Sex promoções de carnes", 16, "89333-33", "Das Bolhas", "2015", "Boladão", "Chuville");
-                Mercados mercadoDois = new Mercados(14, "Djanbolha", "12/02/2007", "Ter, Qui, Sab promoções de verduras", 17, "89444-44", "Das Ambuja", "1452", "Liborne", "Chuville");
-                Mercados mercadoTres = new Mercados(15, "Lagustos", "12/02/2001", "Sex, Sab, Dom mercado inteiro 50% de desconto", 18, "89555-555", "Iscamoja", "2015", "Latest", "Chuville");
-
-            // Receitas Padaria 01
+                // Receitas Padaria 01
                 padariaUm.executaReceita(receitaUmChefUm);
                 padariaUm.executaReceita(receitaDoisChefUm);
                 padariaUm.executaReceita(receitaTresChefUm);
                 padariaUm.executaReceita(receitaUmChefDois);
                 padariaUm.executaReceita(receitaDoisChefDois);
-      
-            // Receitas Padaria 02
+
+                Padaria padariaDois = new Padaria(11, "SóDelicias", "01/05/2020","08:00Hr - 19:00Hr", 14, "89111-11", "Soneca", "Nº: 1784", "Das Notches", "Chuville");
+                // Receitas Padaria 02
                 padariaDois.executaReceita(receitaTresChefDois);
                 padariaDois.executaReceita(receitaUmChefTres);
                 padariaDois.executaReceita(receitaDoisChefTres);
                 padariaDois.executaReceita(receitaTresChefTres);
                 padariaDois.executaReceita(receitaUmChefDois);
 
-            // Receitas Padaria 03
+                Padaria padariaTres = new Padaria(12, "ArtVida", "02/1202018","08:00Hr - 19:00Hr", 15, "89222-22", "Ciranda", "Nº: 1644", "Das Artes", "Chuville");
+                // Receitas Padaria 03
                 padariaTres.executaReceita(receitaUmChefTres);
                 padariaTres.executaReceita(receitaDoisChefDois);
                 padariaTres.executaReceita(receitaDoisChefTres);
                 padariaTres.executaReceita(receitaUmChefUm);
                 padariaTres.executaReceita(receitaTresChefTres);
 
-            // Receitas Mercado 01
+            // Criando Mercados
+                Mercados mercadoUm = new Mercados(13, "Milanda", "12/02/2001", "Seg, Qua, Sex promoções de carnes", 16, "89333-33", "Das Bolhas", "2015", "Boladão", "Chuville");
+                // Receitas Mercado 01
                 mercadoUm.executaReceita(receitaUmChefTres);
                 mercadoUm.executaReceita(receitaDoisChefDois);
                 mercadoUm.executaReceita(receitaTresChefUm);
-  
-            // Receitas Mercado 02
+
+                Mercados mercadoDois = new Mercados(14, "Djanbolha", "12/02/2007", "Ter, Qui, Sab promoções de verduras", 17, "89444-44", "Das Ambuja", "1452", "Liborne", "Chuville");
+                // Receitas Mercado 02
                 mercadoDois.executaReceita(receitaDoisChefDois);
                 mercadoDois.executaReceita(receitaDoisChefTres);
                 mercadoDois.executaReceita(receitaUmChefTres);
-  
-            // Receitas Mercado 03
+
+                Mercados mercadoTres = new Mercados(15, "Lagustos", "12/02/2001", "Sex, Sab, Dom mercado inteiro 50% de desconto", 18, "89555-555", "Iscamoja", "2015", "Latest", "Chuville");
+                // Receitas Mercado 03
                 mercadoTres.executaReceita(receitaTresChefTres);
                 mercadoTres.executaReceita(receitaUmChefDois);
                 mercadoTres.executaReceita(receitaDoisChefTres);
 
-            // Receitas Mercado 01
+            // Receitas Cliente 01
                 clienteUm.executaReceita(receitaUmChefUm);
                 clienteUm.executaReceita(receitaDoisChefTres);
                 clienteUm.executaReceita(receitaDoisChefUm);
 
-            // Receitas Mercado 02
+            // Receitas Cliente 02
                 clienteDois.executaReceita(receitaUmChefDois);
                 clienteDois.executaReceita(receitaTresChefTres);
                 clienteDois.executaReceita(receitaUmChefDois);
 
-            // Receitas Mercado 03
+            // Receitas Cliente 03
                 clienteTres.executaReceita(receitaDoisChefTres);
                 clienteTres.executaReceita(receitaUmChefTres);
                 clienteTres.executaReceita(receitaDoisChefUm);    
  
             // Imprimindo informações no terminal!
 
-            // Informações do Chef Um - Clodovaldo Ramires
-                System.out.println("\n|==============Informações do Chef Clodovaldo==============|");
+            // Informações do Chef Um
+                System.out.println("\n|==============Informações do Chef " + Chef.getChef(1) + "==============|");
 
-                System.out.println("\n|Dados do chef Clodovaldo|");
+                System.out.println("\n|Dados do chef " + Chef.getChef(1) + "|");
                 System.out.println(chefUm);
 
-                System.out.println("\n|Receitas do chef Clodovaldo|");
+                System.out.println("\n|Receitas do chef " + Chef.getChef(1) + "|");
 
                 System.out.println("\nPrimeira Receita:");
                 System.out.println(receitaUmChefUm);
@@ -250,13 +216,13 @@ public class AtividadeAvaliativa04 {
                 System.out.println("\nTerceira Receita:");
                 System.out.println(receitaTresChefUm);
 
-            // Informações do Chef Dois - Vladmir Dracule
-                System.out.println("\n|==============Informações do Chef Vladmir==============|");
+            // Informações do Chef Dois
+                System.out.println("\n|==============Informações do Chef " + Chef.getChef(2) + "==============|");
 
-                System.out.println("\n|Dados do chef Vladmir|");
+                System.out.println("\n|Dados do chef " + Chef.getChef(2) + "|");
                 System.out.println(chefDois);
      
-                System.out.println("\n|Receitas do chef Vladmir|");
+                System.out.println("\n|Receitas do chef " + Chef.getChef(2) + "|");
 
                 System.out.println("\nPrimeira Receita:");
                 System.out.println(receitaUmChefDois);
@@ -268,13 +234,13 @@ public class AtividadeAvaliativa04 {
                 System.out.println(receitaTresChefDois);
 
 
-            // Informações do Chef Três - Zezinho da Esquina
-                System.out.println("\n|==============Informações do Chef Zezinho==============|");
+            // Informações do Chef Três
+                System.out.println("\n|==============Informações do Chef " + Chef.getChef(3) + "==============|");
 
-                System.out.println("\n|Dados do chef Zezinho|");
+                System.out.println("\n|Dados do chef " + Chef.getChef(3) + "|");
                 System.out.println(chefTres);
      
-                System.out.println("\n|Receitas do chef Zezinho|");
+                System.out.println("\n|Receitas do chef " + Chef.getChef(3) + "|");
 
                 System.out.println("\nPrimeira Receita:");
                 System.out.println(receitaUmChefTres);
@@ -285,19 +251,19 @@ public class AtividadeAvaliativa04 {
                 System.out.println("\nTerceira Receita:");
                 System.out.println(receitaTresChefTres);
       
-            // Informações da Padaria Um - Doce Pão 
+            // Informações da Padaria Um - Doce Pão
                 System.out.println("\n|==============Padaria Doce Pão Informações==============|");
 
                 System.out.println("\n|Padaria Doce Pão|");
                 System.out.println(padariaUm);
 
-            // Informações da Padaria Dois - SóDelicias 
+            // Informações da Padaria Dois - SóDelicias
                 System.out.println("\n|==============Padaria SóDelicias Informações==============|");
 
                 System.out.println("\n|Padaria SóDelicias|");
                 System.out.println(padariaDois);
 
-            // Informações da Padaria Três - ArtVida     
+            // Informações da Padaria Três - ArtVida    
                 System.out.println("\n|==============Padaria ArtVida Informações==============|");
 
                 System.out.println("\n|Padaria ArtVida|");
@@ -321,22 +287,22 @@ public class AtividadeAvaliativa04 {
                 System.out.println("\n|Mercado Lagustos|");
                 System.out.println(mercadoTres);    
   
-            // Informações da Cliente Um - Jaco 
+            // Informações da Cliente Um
                 System.out.println("\n|==============Cliente Jaco Informações==============|");
 
-                System.out.println("\n|Cliente Jaco|");
+                System.out.println("\n|Cliente " + Cliente.getCliente(1) + "|");
                 System.out.println(clienteUm);
 
-            // Informações da Mercado Dois - Djanbolha 
+            // Informações da Mercado Dois 
                 System.out.println("\n|==============Cliente Jabo Informações==============|");
 
-                System.out.println("\n|Cliente Jabo|");
+                System.out.println("\n|Cliente " + Cliente.getCliente(2) + "|");
                 System.out.println(clienteDois);
 
-            // Informações da Mercado Três - Lagustos     
+            // Informações da Mercado Três    
                 System.out.println("\n|==============Cliente Jabao Informações==============|");
 
-                System.out.println("\n|Cliente Jabao|");
+                System.out.println("\n|Cliente " + Cliente.getCliente(3) + "|");
                 System.out.println(clienteTres);      
   
             break;
