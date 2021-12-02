@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Padaria extends Estabelecimento{
 
@@ -34,9 +33,15 @@ public class Padaria extends Estabelecimento{
         return this.receitas;
     }
 
-    public void setReceitas(Receita receitas) {
-        this.receitas.add(receitas);
+    public void setReceitas(ArrayList<Receita> receitas) {
+        this.receitas = receitas;
     }
+
+    public void executaReceita(Receita receita)
+    {
+        this.receitas.add(receita);
+        receita.liberaReceita(this);
+    };
 
     @Override
     public boolean equals(Object o) {
