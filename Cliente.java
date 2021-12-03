@@ -57,7 +57,7 @@ public class Cliente extends Pessoa{
             return false;
         }
         Cliente cliente = (Cliente) o;
-        return Objects.equals(this.getCpf(), cliente.getCpf());
+        return Objects.equals(cliente.getId(), this.getId());
     }
 
     @Override
