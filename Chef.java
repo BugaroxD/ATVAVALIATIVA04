@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Chef extends Pessoa implements AnoSalario { 
@@ -63,9 +64,7 @@ public class Chef extends Pessoa implements AnoSalario {
             return false;
         }
         Chef chef = (Chef) o;
-        return this.getCpf() == chef.getCpf()
-            && this.getReceitas() == chef.getReceitas()
-            && this.getNome() == chef.getNome();
+        return Objects.equals(chef.getId(), this.getId());
     }
 
     @Override
