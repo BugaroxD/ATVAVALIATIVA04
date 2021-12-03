@@ -97,9 +97,9 @@ public class Cliente extends Pessoa{
             Connection con = DriverManager.getConnection(url, user, password);
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM cliente;");
-            ArrayList<Cliente> cliente = new ArrayList<>();
+            ArrayList<Cliente> clientes = new ArrayList<>();
             while (rs.next()) {
-                cliente.add(
+                clientes.add(
                     new Cliente(
                         rs.getInt("idCliente"),
                         rs.getString("nome"),
@@ -110,7 +110,7 @@ public class Cliente extends Pessoa{
                 );
             }
             con.close();
-            return cliente;
+            return clientes;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }             

@@ -114,14 +114,9 @@ public class AtividadeAvaliativa04 {
 
             case 9:
             // Criando 3 Chef's
-                Chef chefUm = Chef.getChef(1);
-                Chef chefDois = Chef.getChef(2);
-                Chef chefTres = Chef.getChef(3);
-
-            // Criando 3 Clientes
-                Cliente clienteUm = Cliente.getCliente(1);
-                Cliente clienteDois = Cliente.getCliente(2);
-                Cliente clienteTres = Cliente.getCliente(3);
+            Chef chefUm = Chef.getChef(1);
+            Chef chefDois = Chef.getChef(2);
+            Chef chefTres = Chef.getChef(3);
 
             // Criando 3 Receitas ChefUm
                 Receita receitaUmChefUm = new Receita(1, "X-Burguer", "Assar o Hamburguer, colocar o queijo em cima e montar o lanche", "03", "R$ 20,00", chefUm);
@@ -182,20 +177,25 @@ public class AtividadeAvaliativa04 {
                 mercadoTres.executaReceita(receitaUmChefDois);
                 mercadoTres.executaReceita(receitaDoisChefTres);
 
-            // Receitas Cliente 01
+
+                // Criando 3 Clientes
+                Cliente clienteUm = Cliente.getCliente(1);
+                // Receitas Cliente 01
                 clienteUm.executaReceita(receitaUmChefUm);
                 clienteUm.executaReceita(receitaDoisChefTres);
                 clienteUm.executaReceita(receitaDoisChefUm);
 
-            // Receitas Cliente 02
+                Cliente clienteDois = Cliente.getCliente(2);
+                // Receitas Cliente 02
                 clienteDois.executaReceita(receitaUmChefDois);
                 clienteDois.executaReceita(receitaTresChefTres);
                 clienteDois.executaReceita(receitaUmChefDois);
 
-            // Receitas Cliente 03
+                Cliente clienteTres = Cliente.getCliente(3);
+                // Receitas Cliente 03
                 clienteTres.executaReceita(receitaDoisChefTres);
                 clienteTres.executaReceita(receitaUmChefTres);
-                clienteTres.executaReceita(receitaDoisChefUm);    
+                clienteTres.executaReceita(receitaDoisChefUm); 
  
             // Imprimindo informações no terminal!
 
